@@ -30,6 +30,7 @@ class Image():
                     "array": None,
                     "d_labels": None,
                     "point_size": None,
+                    "points": None,
                     "hull": None}
         
         defaults = update_defaults(defaults, kwargs)
