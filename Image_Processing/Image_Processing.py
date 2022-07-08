@@ -1,6 +1,5 @@
 ### Simple Image processing tools for Borst lab
-from random import gauss
-from selectors import EpollSelector
+
 import cv2
 from cv2 import convexHull
 from scipy.ndimage.filters import gaussian_filter
@@ -64,7 +63,7 @@ def threshold(N, apply = True, inplace = True, **kwargs):
             raise TypeError('Input type not recognised')
 
     n,x = image_hist(N.array)
-    t = GHT(n,x,**kwargs)
+    t = GHT(n,x,**kwargs)[0]
 
     if apply == False:
         return t
@@ -86,7 +85,7 @@ def blur_image(N, sigma = 8, inplace = True):
     Gaussian blurring of an image
     """
     im = N.array.copy()
-    im - gaussian_filter(im,sigma = sigma)
+    im = gaussian_filter(im,sigma = sigma)
 
     if inplace == False:
         return im
