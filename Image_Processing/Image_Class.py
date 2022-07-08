@@ -56,7 +56,7 @@ class Image():
             meta = {'axes': self.d_labels}
         
         if f_name is None:
-            f_name = self.name
+            f_name = self.name = '.tiff'
 
         tiff.imwrite(f_name, self.array, imagej = True, metadata = meta)
 
