@@ -3,6 +3,7 @@
 import tifffile as tiff
 import os
 from tqdm import tqdm
+from copy import deepcopy
 
 def update_defaults(defaults, kwargs):
     """ Update default class arguments"""
@@ -60,6 +61,8 @@ class Image():
 
         tiff.imwrite(f_name, self.array, imagej = True, metadata = meta)
 
+    def __copy__(self):
+        return deepcopy(self)
 
 class ImageList():
     """
