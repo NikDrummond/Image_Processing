@@ -6,14 +6,16 @@ Installation:
 
 pip and git are both needed, to install these on mac use:
 
-```conda install git pip
+```
+conda install git pip
 ```
 
 OpenCV is required, so to install this on mac open the command line and use:
 
 First of all try:
 
-```conda install opencv
+```
+conda install opencv
 ```
 
 If this doesnt work try:
