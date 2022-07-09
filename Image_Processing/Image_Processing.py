@@ -51,7 +51,7 @@ def add_hull(N,t = 0, order = 'x,y'):
     N.hull = convexHull(N.points)
     return N
 
-def threshold(N, apply = True, inplace = True, **kwargs):
+def threshold(N, t = None, apply = True, inplace = True, **kwargs):
     """
     Threshold an image using Generalised Histogram Thresholding    
     
@@ -62,23 +62,27 @@ def threshold(N, apply = True, inplace = True, **kwargs):
         else:
             raise TypeError('Input type not recognised')
 
-    n,x = image_hist(N.array)
-    t = GHT(n,x,**kwargs)[0]
+    im = N.array
 
-    if apply == False:
-        return t
-    else:
-        im = N.array.copy()
+    if t is None:
 
-        mask = im > t
-        mask = np.array(mask).astype(bool)
-        im[mask == False] = 0
+        n,x = image_hist(im)
+        t = GHT(n,x,**kwargs)[0]
 
-        if inplace == False:
-            return im
+        if apply == False:
+            return t
         else:
-            N.array = im
-            return N
+            im = N.array.copy()
+
+    mask = im > t
+    mask = np.array(mask).astype(bool)
+    im[mask == False] = 0
+
+    if inplace == False:
+        return im
+    else:
+        N.array = im
+        return N
 
 def blur_image(N, sigma = 8, inplace = True):
     """

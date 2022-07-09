@@ -4,6 +4,7 @@ import tifffile as tiff
 import os
 from tqdm import tqdm
 from copy import deepcopy
+import numpy as np
 
 def update_defaults(defaults, kwargs):
     """ Update default class arguments"""
@@ -125,3 +126,10 @@ def read_Image(path):
         return N_all
     else:
         raise TypeError('input is not a file or directory')
+
+def save_mask(mask,f_name):
+    """
+    Save an array mask as a tiff
+    """
+    mask = mask.astype(np.uint16)
+    tiff.imwrite(f_name,mask,imagej = True)
