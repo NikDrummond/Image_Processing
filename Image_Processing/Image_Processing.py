@@ -1,11 +1,12 @@
 ### Simple Image processing tools for Borst lab
 
 import cv2
-from cv2 import convexHull
+from scipy.spatial import ConvexHull
 from scipy.ndimage.filters import gaussian_filter
 
 from .Thresholding import *
 from .Image_Class import Image,ImageList
+from .Image_Metrics import get_pixels
 
 # contrast enhancement
 
@@ -46,9 +47,10 @@ def add_hull(N,t = 0, order = 'x,y'):
     fit a Convex hull to an image
     """
 
-    if N.points == None:
-        N.points = get_points(N,t = t,order = order)
-    N.hull = convexHull(N.points)
+    if N.points is None:
+        N = get_points(N,t = t,order = order)
+    N.hull = ConvexHull(N.points)
+    N.hull.density = get_pixels(N, t = t) / N.hull.volume
     return N
 
 def threshold(N, t = None, apply = True, inplace = True, **kwargs):

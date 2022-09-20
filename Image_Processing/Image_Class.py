@@ -100,7 +100,7 @@ def read_Image(path):
                 volume = tif.asarray()
                 axes = tif.series[0].axes
                 volume = volume.astype('float32')
-                name = os.path.splitext(os.path.basename(path))[0]
+                name = os.path.splitext(os.path.basename(f_path))[0]
                 N = Image(name = name, array = volume, d_labels = axes)
                 return N        
         else:
@@ -120,7 +120,7 @@ def read_Image(path):
                         volume = tif.asarray()
                         axes = tif.series[0].axes
                         volume = volume.astype('float32')
-                        name = os.path.splitext(os.path.basename(path))[0]
+                        name = os.path.splitext(os.path.basename(f_path))[0]
                         N_all.append(Image(name = name, array = volume, d_labels = axes))
         N_all = ImageList(N_all)
         return N_all
